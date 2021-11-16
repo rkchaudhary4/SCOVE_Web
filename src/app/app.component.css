@@ -1,0 +1,83 @@
+.top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 70px;
+  z-index: 999;
+  background-color: #c1a1a1;
+}
+
+.left {
+  margin-left: 1vw;
+  height: 100%;
+}
+
+.side {
+  width: 15%;
+}
+
+.sidenav {
+  margin-top: 70px;
+  min-height: calc(100vh - 70px);
+  overflow: hidden;
+}
+.menuFive {
+  width: 35px;
+  height: 26px;
+  margin: 10px 10px;
+  margin-left: 0.2vw;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.menuFive span {
+  background-color: black;
+  position: absolute;
+  border-radius: 2px;
+  transition: 0.3s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+  width: 100%;
+  height: 4px;
+}
+
+.menuFive span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+}
+
+.menuFive span:nth-child(2) {
+  top: 11px;
+  left: 0px;
+}
+
+.menuFive span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+}
+
+.isOpen span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 13px;
+  opacity: 0;
+}
+
+.isOpen span:nth-child(2) {
+  transform: rotate(495deg);
+  top: 11px;
+}
+
+.isOpen span:nth-child(3) {
+  transform: rotate(45deg);
+  top: 11px;
+}
+
+h2 {
+  margin-left: 3vw;
+}
+
+@media only screen and (max-width: 720px) {
+  .side {
+    width: 50%;
+  }
+}

@@ -1,0 +1,43 @@
+<div class="top_item">
+  <mat-form-field appearance="fill">
+    <mat-label>Select a Date</mat-label>
+    <input
+      matInput
+      (focus)="picker.open()"
+      [matDatepicker]="picker"
+      [(ngModel)]="currDate"
+      (dateChange)="fetchData()"
+    />
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+<div
+  echarts
+  [options]="options"
+  theme="dark"
+  [loading]="!loaded"
+></div>
+<mat-tab-group mat-stretch-tabs *ngIf="loaded">
+  <mat-tab label="Present Students">
+    <mat-list *ngIf="present.length > 0; else noPresent">
+      <mat-list-item *ngFor="let n of present">{{ n }}</mat-list-item>
+    </mat-list>
+    <ng-template #noPresent> No students were present on this day </ng-template>
+  </mat-tab>
+  <mat-tab label="Absent Students">
+    <mat-list *ngIf="absent.length > 0; else noAbsent">
+      <mat-list-item *ngFor="let n of absent">{{ n }}</mat-list-item>
+    </mat-list>
+    <ng-template #noAbsent> No students were absent on this day </ng-template>
+  </mat-tab>
+  <mat-tab label="Disallowed Students">
+    <mat-list *ngIf="disallowed.length > 0; else noDisallowed">
+      <mat-list-item *ngFor="let n of disallowed"
+        >{{ n.name }}: {{ n.reason }}</mat-list-item
+      >
+    </mat-list>
+    <ng-template #noDisallowed>
+      No students were disallowed on this day
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

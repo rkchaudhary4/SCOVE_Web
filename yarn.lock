@@ -2180,9 +2180,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001032, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001259:
-  version "1.0.30001261"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001261.tgz#96d89813c076ea061209a4e040d8dcf0c66a1d01"
-  integrity sha512-vM8D9Uvp7bHIN0fZ2KQ4wnmYFpJo/Etb4Vwsuc+ka0tfGDHvOPrFm6S/7CCNLSOkAUjenT2HnUPESdOIL91FaA==
+  version "1.0.30001280"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001280.tgz"
+  integrity sha512-kFXwYvHe5rix25uwueBxC569o53J6TpnGu0BEEn+6Lhl2vsnAumRFWEBhDft1fwyo6m1r4i+RqA4+163FpeFcA==
 
 canonical-path@1.0.0:
   version "1.0.0"
@@ -3012,6 +3012,14 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
+
+echarts@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-5.2.2.tgz#ec3c8b2a151cbba71ba3c2c7cf9b2f2047ce4370"
+  integrity sha512-yxuBfeIH5c+0FsoRP60w4De6omXhA06c7eUYBsC1ykB6Ys2yK5fSteIYWvkJ4xJVLQgCvAdO8C4mN6MLeJpBaw==
+  dependencies:
+    tslib "2.3.0"
+    zrender "5.2.1"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -5063,6 +5071,20 @@ neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+ngx-echarts@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-echarts/-/ngx-echarts-8.0.0.tgz#7b6203eddb308ef82f04887e258dc2f887858251"
+  integrity sha512-Z08fnvHqUB8L7vPlljgSFV/HXac+G6Z3CR7n4eN1xuhasSvzKAxVx8ntbbrygm4Zs4klEcciX4ht9lEL2a3qOg==
+  dependencies:
+    tslib "^2.3.0"
+
+ngx-webcam@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/ngx-webcam/-/ngx-webcam-0.3.2.tgz#5cbfecea0e0ed025b8e2bbd4b3ce09db3038c0b4"
+  integrity sha512-7imKrqc8b/CtLZ9g79fenCXcEwUxsi/4mdTnoSdwdbVHtU1pUmebxUNFPBEdEitiD09awGkcv2ZcgtqmJvIi8A==
+  dependencies:
+    tslib "^2.0.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -7398,12 +7420,17 @@ tslib@2.2.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
   integrity sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
 
+tslib@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
+
 tslib@^1.10.0, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.0, tslib@^2.1.0, tslib@^2.2.0:
+tslib@^2.0.0, tslib@^2.1.0, tslib@^2.2.0, tslib@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
@@ -7912,3 +7939,10 @@ zone.js@~0.11.4:
   integrity sha512-DDh2Ab+A/B+9mJyajPjHFPWfYU1H+pdun4wnnk0OcQTNjem1XQSZ2CDW+rfZEUDjv5M19SBqAkjZi0x5wuB5Qw==
   dependencies:
     tslib "^2.0.0"
+
+zrender@5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-5.2.1.tgz#5f4bbda915ba6d412b0b19dc2431beaad05417bb"
+  integrity sha512-M3bPGZuyLTNBC6LiNKXJwSCtglMp8XUEqEBG+2MdICDI3d1s500Y4P0CzldQGsqpRVB7fkvf3BKQQRxsEaTlsw==
+  dependencies:
+    tslib "2.3.0"
