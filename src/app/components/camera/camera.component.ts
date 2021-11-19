@@ -69,6 +69,7 @@ export class CameraComponent implements OnInit {
 
     d.afterClosed().subscribe((result) => {
       if (result) {
+        console.log(result);
         const len = this.train.length;
         this.train[len - 1].files.push(result);
         if (this.train[len - 1].files.length === this.numImages) {

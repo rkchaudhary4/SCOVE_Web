@@ -34,17 +34,22 @@ export class DaywiseComponent implements OnInit {
       .subscribe((res: any) => {
         this.present = [];
         this.absent = [];
+        this.disallowed = [];
         for (const i of Object.keys(res.all)) {
           const name = res.all[i];
-          const index = res.att.findIndex((e: any) => e.faceLabel === name);
-          if (index === -1) {
+          const arr = res.att.filter((e: any) => e.faceLabel === name);
+          if (arr.length === 0) {
             this.absent.push(name);
-          } else if (res.att[index].disallowReason.length === 0) {
+          } else if (arr[arr.length - 1].disallowReason.length === 0) {
             this.present.push(name);
           }
         }
         res.att.forEach((e: any) => {
-          if (e.disallowReason.length > 0) {
+          if (
+            e.disallowReason.length > 0 &&
+            (this.present.findIndex((s) => s === e.faceLabel) === -1 ||
+              e.faceLabel === 'unknown')
+          ) {
             this.disallowed.push({
               name: e.faceLabel,
               reason: e.disallowReason,
