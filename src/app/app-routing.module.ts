@@ -1,3 +1,4 @@
+import { WebcamComponent } from './components/webcam/webcam.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { StudentWiseComponent } from './components/student-wise/student-wise.component';
 import { DaywiseComponent } from './components/daywise/daywise.component';
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'student', component: StudentWiseComponent },
   { path: 'report', component: ReportsComponent },
   { path: 'camera', component: CameraComponent },
+  { path: 'webcam', component: WebcamComponent },
   { path: '**', redirectTo: 'daywise' },
 ];
 

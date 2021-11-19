@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -23,6 +24,9 @@ import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { WebcamComponent } from './components/webcam/webcam.component';
+import { ConfirmerComponent } from './components/webcam/confirmer/confirmer.component';
+import { WebcamModule } from 'ngx-webcam';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     DaywiseComponent,
     StudentWiseComponent,
     ReportsComponent,
+    WebcamComponent,
+    ConfirmerComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +61,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTabsModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatDialogModule,
+    WebcamModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

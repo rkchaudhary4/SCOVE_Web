@@ -1,0 +1,71 @@
+<h1>Register Faces</h1>
+<div class="top_item" *ngIf="!numFixed" fxLayoutGap="3vw">
+  <mat-form-field appearance="fill">
+    <mat-label>Number of pictures per student</mat-label>
+    <input
+      matInput
+      type="number"
+      min="3"
+      max="12"
+      [(ngModel)]="numImages"
+      #num="ngModel"
+    />
+    <mat-hint>Should be between 3 and 12</mat-hint>
+  </mat-form-field>
+  <button mat-raised-button [disabled]="num.invalid" (click)="numFixed = true">
+    Proceed
+  </button>
+</div>
+<h3 fxLayoutAlign="center center" *ngIf="numFixed">
+  Number of Photos per person: {{ numImages }}
+</h3>
+<div class="top_item" *ngIf="numFixed && !started" fxLayoutGap="3vw">
+  <mat-form-field appearance="fill">
+    <mat-label>Name of student</mat-label>
+    <input matInput [(ngModel)]="name" minlength="1" />
+  </mat-form-field>
+  <button mat-raised-button [disabled]="name.length === 0" (click)="start()">
+    Start
+  </button>
+</div>
+<div
+  class="top_item"
+  fxLayoutAlign="center center"
+  *ngIf="!started && train.length > 0"
+>
+  <button mat-raised-button (click)="sendData()" [disabled]="sending">
+    Send Data
+  </button>
+</div>
+<h4 fxLayoutAlign="center center" *ngIf="error">Name already exists</h4>
+<h4 fxLayoutAlign="center center" *ngIf="sending">Sending Data</h4>
+<div *ngIf="started">
+  <div *ngIf="isCameraExist; else noCameraExist">
+    <div style="text-align: center">
+      <div class="btn-group" fxLayoutGap="2vw">
+        <button mat-raised-button class="button" (click)="takeSnapshot()">
+          Take Picture
+        </button>
+        <button mat-raised-button class="button" (click)="changeWebCame(true)">
+          Toggle Camera
+        </button>
+      </div>
+      <br />
+      <webcam
+        [height]="500"
+        [width]="1000"
+        [trigger]="triggerObservable"
+        (imageCapture)="handleImage($event)"
+        *ngIf="showWebcam"
+        [switchCamera]="nextWebcamObservable"
+      ></webcam>
+    </div>
+    <div *ngIf="errors.length > 0">
+      <h4>Error Messages:</h4>
+      <ul *ngFor="let error of errors">
+        <li>{{ error | json }}</li>
+      </ul>
+    </div>
+  </div>
+  <ng-template #noCameraExist> Camera device not available </ng-template>
+</div>

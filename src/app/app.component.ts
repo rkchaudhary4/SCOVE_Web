@@ -21,9 +21,13 @@ export class AppComponent {
     },
     { name: 'Reports', link: './report' },
     {
-      name: 'Register Faces',
+      name: 'Register Faces From Files',
       link: './camera',
     },
+    {
+      name: 'Register Faces Using Camera',
+      link: './webcam',
+    }
   ];
 
   toggle(button: boolean) {
