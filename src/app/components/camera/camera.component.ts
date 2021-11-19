@@ -1,8 +1,5 @@
-import { ConfirmerComponent } from './confirmer/confirmer.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
-import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
-import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
 
@@ -11,90 +8,79 @@ import { environment } from './../../../environments/environment';
   styleUrls: ['./camera.component.css'],
 })
 export class CameraComponent implements OnInit {
-  showWebcam = true;
-  isCameraExist = true;
-  errors: WebcamInitError[] = [];
-  private trigger: Subject<void> = new Subject<void>();
-  private nextWebcam: Subject<boolean | string> = new Subject<
-    boolean | string
-  >();
-  numImages = 3;
-  numFixed = false;
-  started = false;
-  name = '';
-  error = false;
   sending = false;
   train: { name: string; files: any[] }[] = [];
-  constructor(private http: HttpClient, private dialog: MatDialog) {}
+  uploading = false;
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
-  ngOnInit(): void {
-    WebcamUtil.getAvailableVideoInputs().then(
-      (mediaDevices: MediaDeviceInfo[]) => {
-        this.isCameraExist = mediaDevices && mediaDevices.length > 0;
-      }
-    );
-  }
+  ngOnInit(): void {}
 
-  takeSnapshot(): void {
-    this.trigger.next();
-  }
-
-  onOffWebCame() {
-    this.showWebcam = !this.showWebcam;
-  }
-
-  handleInitError(error: WebcamInitError) {
-    this.errors.push(error);
-  }
-
-  changeWebCame(directionOrDeviceId: boolean | string) {
-    this.nextWebcam.next(directionOrDeviceId);
-  }
-
-  start(): void {
-    const exist = this.train.find((item) => item.name === this.name);
-    if (exist) {
-      this.error = true;
+  setFiles(name: string, fileList: Event): void {
+    if (fileList === null) {
       return;
-    }
-    this.error = false;
-    this.train.push({ name: this.name, files: [] });
-    this.started = true;
-  }
-
-  handleImage(webcamImage: WebcamImage) {
-    const d = this.dialog.open(ConfirmerComponent, {
-      data: webcamImage.imageAsDataUrl,
-    });
-
-    d.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log(result);
-        const len = this.train.length;
-        this.train[len - 1].files.push(result);
-        if (this.train[len - 1].files.length === this.numImages) {
-          this.started = false;
+    } else {
+      const files = (fileList.target as HTMLInputElement).files;
+      if (files !== null) {
+        for (const file of files) {
+          if (!file.type.includes('image')) {
+            this.snackBar.open('Only images are allowed', '', {
+              duration: 2000,
+            });
+            return;
+          }
+        }
+        if (files.length < 3) {
+          this.snackBar.open('Upload at least 3 images', '', {
+            duration: 2000,
+          });
+          return;
+        }
+        if (files.length > 5) {
+          this.snackBar.open('Upload maximum 5 images', '', {
+            duration: 2000,
+          });
+          return;
+        }
+        this.train.push({ name, files: [] });
+        let done = 0;
+        this.uploading = true;
+        for (const file of files) {
+          const reader = new FileReader();
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              canvas.width = img.width;
+              canvas.height = img.height;
+              ctx.drawImage(img, 0, 0);
+              this.train[this.train.length - 1].files.push(canvas.toDataURL());
+              done++;
+              if (done === files.length) {
+                this.uploading = false;
+                this.snackBar.open('Uploaded successfully', '', {
+                  duration: 2000,
+                });
+              }
+            };
+            img.src = (e.target as FileReader).result as string;
+          };
+          reader.readAsDataURL(file);
         }
       }
-    });
+    }
   }
 
   sendData(): void {
     this.sending = true;
+    if (this.train.length <= 1) {
+      return;
+    }
     this.http
       .post(`${environment.server}/register`, { train: this.train })
       .subscribe((data) => {
-        console.log(data);
         this.sending = false;
         this.train = [];
       });
-  }
-
-  get triggerObservable(): Observable<void> {
-    return this.trigger.asObservable();
-  }
-
-  get nextWebcamObservable(): Observable<boolean | string> {
-    return this.nextWebcam.asObservable();
   }
 }

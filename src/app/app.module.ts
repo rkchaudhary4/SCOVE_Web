@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { WebcamModule } from 'ngx-webcam';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -23,8 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
-import { ConfirmerComponent } from './components/camera/confirmer/confirmer.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -33,7 +31,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     DaywiseComponent,
     StudentWiseComponent,
     ReportsComponent,
-    ConfirmerComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +40,6 @@ import { MatDialogModule } from '@angular/material/dialog';
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    WebcamModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
@@ -58,7 +54,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     MatTabsModule,
     MatButtonModule,
-    MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
